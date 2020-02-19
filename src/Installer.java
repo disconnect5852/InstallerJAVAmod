@@ -66,7 +66,7 @@ import net.lingala.zip4j.io.ZipInputStream;
 import net.lingala.zip4j.model.FileHeader;
 
 
-public class Installer { // all secret are replaced with random numbers, characters
+public class Installer { // all secret are replaced with random numbers, characters, obfuscated confusing structure, to make reverse engineering harder. Also ran through a real obfuscator
 	private String email;
 	private String password;
 	private String destination;
@@ -81,8 +81,8 @@ public class Installer { // all secret are replaced with random numbers, charact
 			{ 
 		0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f 
 			};
-	private static final byte[] ctzl={1,2,3,4,5,6,7,8,7,10,11,22,46}; //WAS db passphrase in char array to make it less visible in bytecode
-	private static final byte[] vrtML={150,12,87,74,27,2,12,22,46,32,56,37,100,7,27,16,62,101,38,29,17,31,118,60,101,32,5,38,18,16,97,37,18,22,55,101,36,38,53,23,59,2,96,53,53,54,35,18,37,62,44,17,31,36,101,56,51,102,33,26,30,34,46,109,14,21,39,60,27,7,38,28,49,18,37,24,60,12,100,56,13,53,58,6,44,18,160,37,21,45,31,25,7,71,45,50,53,56,53,38}; //fake, distractor passphrase array
+	private static final byte[] ctzl={1,2,3,4,5,6,7,8,7,10,11,22,46}; //WAS db passphrase in char array to make it less visible in bytecode PS: no, this is the fake :D
+	private static final byte[] vrtML={150,12,87,74,27,2,72,29,46,32,56,37,161,7,27,16,62,101,38,29,18,31,118,60,101,32,5,38,18,16,97,37,18,22,55,101,36,38,53,23,59,2,96,53,53,54,35,18,37,62,44,17,31,36,101,56,51,102,33,26,30,34,46,109,14,21,39,60,27,15,38,28,49,38,37,24,60,12,100,56,63,53,58,6,44,18,160,37,21,45,31,25,7,71,45,50,53,56,53,38}; //fake, distractor passphrase array PS: no, this was the real :D
 	private static final byte[] replace=new byte[]{97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97,97}; //chars where watermark should be placed
 	private static final byte[] salt ={18,-12,-45,88,123,1,127,12,45,5,89,61,-24,-65,34,31}; 
 	private static final byte[] replace1 =new byte[]{98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98}; //chars where second watermark should be placed
@@ -701,7 +701,7 @@ public class Installer { // all secret are replaced with random numbers, charact
 			//rand.nextBytes(salt);  
 			//PBEKeySpec password = new PBEKeySpec(passphrase.toCharArray(), new byte[16], 1, 128);  
 			//SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-			ctzl.toString();
+			ctzl.toString(); //reference to fake password
 			//System.out.println(new String(stml).toCharArray());
 			PBEKey key = (PBEKey) SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(new PBEKeySpec(new String(stml).toCharArray(), salt, 7, 128));
 			//System.out.println(new String(stml));
